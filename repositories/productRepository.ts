@@ -1,9 +1,11 @@
 import ProductModel from "../model/productModel"
 import CategoryMoel from "../model/categoryModel"
+import WishListModel from "../model/wishListModel"
 import { IProductRepository } from "../interface/product/Product.repository.interface"
 class ProductRepository implements IProductRepository{
     private _productModel=ProductModel
     private _categoryModel=CategoryMoel
+    private  _wishListModel=WishListModel
 
     async findExistCategory(categoryName:any){
         console.log("cateeeeeeeee",categoryName)
@@ -102,10 +104,10 @@ try {
             category: categoryDoc._id,
             subCategory: subCategoryDoc._id
         })
-        const savedProduct = await newProduct.save();
+        const savedProduct = await newProduct.save()
 
 } catch (error) {
-    console.error("Error adding products:", error);
+    console.error("Error adding products:", error)
 
 }
 }
@@ -156,6 +158,35 @@ return products
     } catch (error) {
         console.error("Error fetching categories:", error)
         throw new Error("Failed to fetch categories")
+    }
+}
+async existedWishList(productId:string){
+    console.log("reached existed wishlist")
+    try {
+        const existedWishList=await this._wishListModel.findOne({productId})
+        console.log("existedWishList?????/",existedWishList)
+        return existedWishList
+    } catch (error) {
+        console.error("Error in existingwishlist:", error);
+            throw error;
+    }
+
+}
+async addWishList(productId:string){
+try {
+   const addWishList= await this._wishListModel.create({ productId })
+return addWishList
+} catch (error) {
+    console.error("Error adding wishlist:", error);
+}
+}
+async getWishlist(){
+    try {
+        const wishlist = await this._wishListModel.find().populate("productId")
+        return wishlist
+
+    } catch (error) {
+        console.log("error in wishlistgetting",error)
     }
 }
     

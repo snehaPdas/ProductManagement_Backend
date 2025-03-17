@@ -4,5 +4,7 @@ export interface IProductService{
     addSubCategory(categoryName:string, subCategoryName:string):Promise<any>
     addProduct(name:string, category:string, subcategory:string,imageFile:any):Promise<any>
     getproduct():Promise<any>
+    addWishList(productId:string):Promise<any>
+    getWishList():Promise<any>
 
 }

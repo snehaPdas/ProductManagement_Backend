@@ -4,6 +4,7 @@ import { IProductService } from "../interface/product/Product.service.interface"
 
 class ProductController{
 private _productService:IProductService
+
 constructor(productServiceInstance: IProductService) { 
     this._productService = productServiceInstance;  
   }
@@ -85,13 +86,46 @@ try {
 async getproduct(req: Request, res: Response, next: NextFunction):Promise<any>{
     try {
         const products = await this._productService.getproduct()
-        console.log("??????????/",)
+    
         res.status(200).json(products)
 
 
     } catch (error) {
         console.error("Error fetching products:", error)
         res.status(500).json({ message: "Internal Server Error" })
+    }
+
+}
+async addWishList(req: Request, res: Response, next: NextFunction):Promise<any>{
+
+    try {
+        const { productId } = req.body
+       const addwishList=await this._productService.addWishList(productId)
+       return res.status(200).json({ message: "product added successfully", addwishList })
+
+        
+    } catch (error:any) {
+       if( error.message==="wishlist already exist"){
+        console.log("77")
+        res.status(400).json({message:"wishlist already existed"})
+       }else{
+        res.status(500).json({ message: "Internal Server Error" })
+
+       }
+        
+    }
+}
+async getWishList(req: Request, res: Response, next: NextFunction):Promise<any>{
+    console.log("1")
+    try {
+        const wishList = await this._productService.getWishList()
+
+        res.status(200).json(wishList);
+
+
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching wishlist" })
+
     }
 
 }

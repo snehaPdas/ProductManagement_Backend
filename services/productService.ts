@@ -69,6 +69,30 @@ class ProductService implements IProductService{
         }
 
     }
+    async addWishList(productId:string){
+        try {
+             const existedWishList=await this._productRepository.existedWishList(productId)
+             if(existedWishList){
+                throw new Error("wishlist already exist")
+             }
+             const addWishList=await this._productRepository.addWishList(productId)
+             return addWishList
+        } catch (error) {
+            console.log(error)
+            throw error
+
+        }
+
+    }
+    
+    async getWishList(){
+        try {
+            return await this._productRepository.getWishlist()
+
+        } catch (error) {
+            console.log("error in service getting wishlist",error)
+        }
+    }
 
 }
 

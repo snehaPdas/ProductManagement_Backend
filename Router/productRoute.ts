@@ -21,6 +21,8 @@ router.get("/getcategory",productControllerInstance.getCategory.bind(productCont
 router.post("/subcategory",productControllerInstance.addSubCategory.bind(productControllerInstance))
 router.post("/addproduct",upload.single("image"),productControllerInstance.addProduct.bind(productControllerInstance))
 router.get("/getproduct",productControllerInstance.getproduct.bind(productControllerInstance))
+router.post("/addwishlist",productControllerInstance.addWishList.bind(productControllerInstance))
+router.get("/getwishlist",productControllerInstance.getWishList.bind(productControllerInstance))
 
 
 
