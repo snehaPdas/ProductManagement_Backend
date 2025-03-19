@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const multer_1 = __importDefault(require("multer"));
+const storage = multer_1.default.memoryStorage();
+const upload = (0, multer_1.default)({ storage: storage });
+const productRepository_1 = __importDefault(require("../repositories/productRepository"));
+const productService_1 = __importDefault(require("../services/productService"));
+const ProductController_1 = __importDefault(require("../Controllers/ProductController"));
+console.log("Imported ProductController:", ProductController_1.default);
+const router = express_1.default.Router();
+const productRepositoryInstance = new productRepository_1.default();
+const productServiceInstance = new productService_1.default(productRepositoryInstance);
+const productControllerInstance = new ProductController_1.default(productServiceInstance);
+router.post("/category", productControllerInstance.addCategory.bind(productControllerInstance));
+router.get("/getcategory", productControllerInstance.getCategory.bind(productControllerInstance));
+router.post("/subcategory", productControllerInstance.addSubCategory.bind(productControllerInstance));
+router.post("/addproduct", upload.single("image"), productControllerInstance.addProduct.bind(productControllerInstance));
+router.get("/getproduct", productControllerInstance.getproduct.bind(productControllerInstance));
+router.post("/addwishlist", productControllerInstance.addWishList.bind(productControllerInstance));
+router.get("/getwishlist", productControllerInstance.getWishList.bind(productControllerInstance));
+router.delete("/removewishlist/:productId", productControllerInstance.removeWishlist.bind(productControllerInstance));
+router.get("/getproduct/:productId", productControllerInstance.getselectedproduct.bind(productControllerInstance));
+router.put("/updateproduct/:productId", upload.single("image"), productControllerInstance.updateproduct.bind(productControllerInstance));
+exports.default = router;
