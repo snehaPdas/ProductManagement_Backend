@@ -110,6 +110,34 @@ return removeWishList
 
 }
     }
+    async getselectedproduct(productId:string){
+        try {
+            return await this._productRepository.getselectedproduct(productId)
+
+        } catch (error) {
+            console.log("fetching particular product details",error)
+        }
+
+    }
+    async updateproduct(productId:string,formData:any,imageFile:any){
+        console.log("???????")
+        try {
+            let imageUrl=""
+            console.log("(((",imageFile)
+            if(imageFile){
+                console.log(">>")
+                const folder = "productImages"
+                const result = await uploadToCloudinary(imageFile, folder);
+                imageUrl = result.secure_url
+                let categorydoc=await this._productRepository.updateproduct(productId,formData,imageUrl)
+        return categorydoc
+    
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
 }
 

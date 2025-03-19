@@ -6,6 +6,7 @@ const upload = multer({ storage: storage });
 import ProductRepository from "../repositories/productRepository"
 import ProductService from "../services/productService"
 import ProductController from "../Controllers/ProductController"
+
 console.log("Imported ProductController:", ProductController)
 
 const router =express.Router()
@@ -24,6 +25,10 @@ router.get("/getproduct",productControllerInstance.getproduct.bind(productContro
 router.post("/addwishlist",productControllerInstance.addWishList.bind(productControllerInstance))
 router.get("/getwishlist",productControllerInstance.getWishList.bind(productControllerInstance))
 router.delete("/removewishlist/:productId",productControllerInstance.removeWishlist.bind(productControllerInstance))
+router.get("/getproduct/:productId",productControllerInstance.getselectedproduct.bind(productControllerInstance))
+router.put("/updateproduct/:productId",upload.single("image"),productControllerInstance.updateproduct.bind(productControllerInstance))
+
+
 
 
 

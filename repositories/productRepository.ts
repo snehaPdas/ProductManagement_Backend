@@ -203,6 +203,36 @@ async getWishlist(){
         }
 
     }
+    async getselectedproduct(productId:string){
+        try {
+            const product=await this._productModel.findById(productId)
+            return product
+        } catch (error) {
+            console.error("Error fetching product:", error);
+
+        }
+    }
+    async updateproduct(productId:string,formData:any,imageUrl:any){
+        try {
+            console.log("form data is",formData)
+            const updateData={
+                pName:formData.name,
+                category:formData.category,
+                subCategory:formData.subCategory,
+                pImage:imageUrl
+            }
+           
+            const updatedProduct=await this._productModel.findByIdAndUpdate(productId,{$set:updateData},{new:true})
+            if (!updatedProduct) {
+                throw new Error("Product not found");
+            }
+            console.log("Product updated successfully:", updatedProduct);
+            return updatedProduct;
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 }
 

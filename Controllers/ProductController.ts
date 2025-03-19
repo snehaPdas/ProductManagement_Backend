@@ -147,6 +147,41 @@ async removeWishlist(req: Request, res: Response, next: NextFunction):Promise<an
            }
     }
 }
+async getselectedproduct(req: Request, res: Response, next: NextFunction):Promise<any>{
+    try {
+        const {productId}=req.params
+        const products = await this._productService.getselectedproduct(productId)
+    console.log("yes got particular product details",products)
+        res.status(200).json(products)
+
+
+    } catch (error) {
+        console.error("Error fetching products:", error)
+        res.status(500).json({ message: "Internal Server Error" })
+    }
+
+}
+async updateproduct(req: Request, res: Response, next: NextFunction):Promise<any>{
+    console.log("hittttttt")
+    try {
+        const {productId}=req.params
+        const formData=req.body
+        const imageFile = req.file ? req.file.buffer : null;
+        console.log("Product ID:", productId);
+        console.log("Received Form Data:", formData);
+        console.log("Uploaded Image:", imageFile ? "Buffer received" : "No file uploaded");
+
+        if (imageFile) {
+            console.log("Image Buffer Size:", imageFile);
+        }
+        const response=await this._productService.updateproduct(productId,formData,imageFile)
+        return res.status(200).json({ message: "product edited successfully", response })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
 
 }
 

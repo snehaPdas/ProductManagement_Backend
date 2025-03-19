@@ -7,5 +7,7 @@ export interface IProductService{
     addWishList(productId:string):Promise<any>
     getWishList():Promise<any>
     removeWishList(productId:string):Promise<any>
+    getselectedproduct(productId:string):Promise<any>
+    updateproduct(productId:string,formData:any,imageFile:any):Promise<any>
 
 }
