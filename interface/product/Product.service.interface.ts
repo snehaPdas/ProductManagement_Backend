@@ -6,5 +6,6 @@ export interface IProductService{
     getproduct():Promise<any>
     addWishList(productId:string):Promise<any>
     getWishList():Promise<any>
+    removeWishList(productId:string):Promise<any>
 
 }

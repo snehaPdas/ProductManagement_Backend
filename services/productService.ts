@@ -73,6 +73,7 @@ class ProductService implements IProductService{
         try {
              const existedWishList=await this._productRepository.existedWishList(productId)
              if(existedWishList){
+                
                 throw new Error("wishlist already exist")
              }
              const addWishList=await this._productRepository.addWishList(productId)
@@ -92,6 +93,22 @@ class ProductService implements IProductService{
         } catch (error) {
             console.log("error in service getting wishlist",error)
         }
+    }
+    async removeWishList(productId:string){
+try {
+    const existedWishList=await this._productRepository.existedWishList(productId)
+    if(existedWishList){
+       
+       throw new Error("wishlist already exist")
+    }
+    const removeWishList=await this._productRepository.removeWishList(productId)
+
+return removeWishList
+} catch (error) {
+      console.log(error)
+            throw error
+
+}
     }
 
 }

@@ -190,7 +190,19 @@ async getWishlist(){
     }
 }
     
-    
+    async removeWishList(productId:string){
+        try {
+            await this._wishListModel.deleteOne({ _id:productId })
+            const updatedWishlist = await this._wishListModel.find()
+            return updatedWishlist
+
+
+        } catch (error) {
+            console.log("error in wishlistremove",error)
+
+        }
+
+    }
 
 }
 

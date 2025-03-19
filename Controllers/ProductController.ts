@@ -129,6 +129,24 @@ async getWishList(req: Request, res: Response, next: NextFunction):Promise<any>{
     }
 
 }
+async removeWishlist(req: Request, res: Response, next: NextFunction):Promise<any>{
+    console.log("yes reached in remove")
+    try {
+        const {productId}=req.params
+        console.log("_________",productId)
+        const removeWishlist=await this._productService.removeWishList(productId)
+        return res.status(200).json({ message: "product deleted successfully", removeWishlist })
+
+    } catch (error:any) {
+        if( error.message==="wishlist already exist"){
+            
+            res.status(400).json({message:"wishlist already existed"})
+           }else{
+            res.status(500).json({ message: "Internal Server Error" })
+    
+           }
+    }
+}
 
 }
 

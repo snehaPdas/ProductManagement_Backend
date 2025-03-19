@@ -8,5 +8,6 @@ export interface IProductRepository{
     existedWishList(productId:string):Promise<any>
     addWishList(productId:string):Promise<any>
     getWishlist():Promise<any>
+    removeWishList(productId:string):Promise<any>
 
 }

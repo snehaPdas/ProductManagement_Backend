@@ -23,6 +23,7 @@ router.post("/addproduct",upload.single("image"),productControllerInstance.addPr
 router.get("/getproduct",productControllerInstance.getproduct.bind(productControllerInstance))
 router.post("/addwishlist",productControllerInstance.addWishList.bind(productControllerInstance))
 router.get("/getwishlist",productControllerInstance.getWishList.bind(productControllerInstance))
+router.delete("/removewishlist/:productId",productControllerInstance.removeWishlist.bind(productControllerInstance))
 
 
 
