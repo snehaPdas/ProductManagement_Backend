@@ -6,7 +6,7 @@ import productRoute from "./Router/productRoute"
 
 const port = 5000;
 const app = express();
-const MONGO_URL = "mongodb://localhost:27017/PRODUCT_MANAGEMENT_APP_";
+const MONGO_URL = process.env.MONGODB!
 
 // MongoDB connection
 mongoose.connect(MONGO_URL)
