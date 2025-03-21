@@ -10,7 +10,7 @@ const userRoute_1 = __importDefault(require("./Router/userRoute"));
 const productRoute_1 = __importDefault(require("./Router/productRoute"));
 const port = 5000;
 const app = (0, express_1.default)();
-const MONGO_URL = "mongodb://localhost:27017/PRODUCT_MANAGEMENT_APP_";
+const MONGO_URL = process.env.MONGODB;
 // MongoDB connection
 mongoose_1.default.connect(MONGO_URL)
     .then(() => {
@@ -20,8 +20,9 @@ mongoose_1.default.connect(MONGO_URL)
     console.error("MongoDB could not be connected:", error.message);
 });
 // Middleware
+console.log("urrrrrrrlllll", process.env.FRONT_URL);
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", process.env.FRONT_URL],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }));
