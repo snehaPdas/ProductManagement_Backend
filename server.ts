@@ -19,7 +19,7 @@ mongoose.connect(MONGO_URL)
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173",process.env.FRONT_URL!],
   methods: ["GET", "POST","DELETE","PUT"],
   credentials: true
 }));
