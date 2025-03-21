@@ -20,7 +20,7 @@ mongoose.connect(MONGO_URL)
 // Middleware
 
 app.use(cors({
-  origin: ["http://localhost:5173",process.env.FRONT_URL!],
+  origin: ["http://localhost:5173","https://product-management-frontend-chi.vercel.app"],
   methods: ["GET", "POST","DELETE","PUT"],
   credentials: true
 }));
